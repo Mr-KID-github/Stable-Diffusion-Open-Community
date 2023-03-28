@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Your extension title</title>
+    <meta charset="utf-8" />
+    <title>Stable Diffusion To Notion</title>
+
+    <style>
+        body {
+            width: 400px;
+            height: 400px;
+        }
+
+        #info {
+            overflow: auto;
+            height: 300px;
+        }
+    </style>
     <script src="popup.js"></script>
 </head>
+
 <body>
-    <h1>Hello, world!</h1>
+    <h1>请确认以下信息发送到Notion？</h1>
+    <button id="sendToNotion">确定</button>
+    <h3>从页面中获取的信息：</h3>
+    <div id="info_img">img</div>
+    <div id="info_prompt">Prompt</div>
+    <div id="info_negativePrompt">Negative Prompt</div>
+    <div id="info_parameter">Parameter</div>
 </body>
+
 </html>

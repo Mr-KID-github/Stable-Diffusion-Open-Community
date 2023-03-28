@@ -1,25 +1,33 @@
 {
-    "manifest_version": 2,
-    "name": "Stable Diffusion To Notion",
-    "version": "1.0",
-    "description": "将网页中的特定信息发送给Notion",
-    "content_scripts": [
-      {
-        "matches": ["http://127.0.0.1:7860/*"],
-        "js": ["content.js"]
-      }
+  "manifest_version": 2,
+  "name": "Stable Diffusion To Notion",
+  "version": "1.0",
+  "description": "将网页中的特定信息发送给Notion",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://127.0.0.1:7860/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "background.js"
     ],
-    "background": {
-        "scripts": ["background.js"],
-        "persistent": false
-      },
-    "browser_action": {
-        "default_popup": "popup.html"
-    },
-    "permissions": [
-      "http://127.0.0.1:7860/",
-      "activeTab",
-      "storage",
-      "https://api.notion.com/*"
-    ]
-  }
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "http://127.0.0.1:7860/",
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://api.notion.com/*"
+  ]
+}
