@@ -37,58 +37,65 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // 由于Notion暂时还不支持文件上传，因此我们将使用Github为我的提供文件托管服务（图床）
 // 将图片解码至base64
+let img2Notion_url = ""
 function translate() {
-    // 获取img元素
-    const img = document.getElementById('info_img');
+    return new Promise((resolve, reject) => {
+        const img = document.getElementById('info_img');
+        const image = new Image();
+        image.src = img.src;
+        const splitArray = image.src.split("/");
+        const img_name = splitArray[splitArray.length - 2] + "/" + splitArray[splitArray.length - 1];
+        console.log(img_name);
+        img2Notion_url = "https://github.com/Mr-KID-github/Stable-Diffusion-Open-Community/blob/main/images/" + img_name + "?raw=true"
 
-    // 创建一个新的Image对象
-    const image = new Image();
+        image.onload = function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = image.width;
+            canvas.height = image.height;
+            const context = canvas.getContext('2d');
+            context.drawImage(image, 0, 0);
+            const base64 = canvas.toDataURL().split(',')[1];
 
-    // 设置Image对象的src属性为img元素的src属性
-    image.src = img.src;
-
-    // 等待图像加载完成
-    image.onload = function () {
-        // 创建一个canvas元素
-        const canvas = document.createElement('canvas');
-
-        // 设置canvas的大小为图像大小
-        canvas.width = image.width;
-        canvas.height = image.height;
-
-        // 在canvas上绘制图像
-        const context = canvas.getContext('2d');
-        context.drawImage(image, 0, 0);
-
-        // 将canvas转换为base64编码的图像数据
-        base64 = canvas.toDataURL().split(',')[1];
-        // 在控制台输出base64编码的图像数据
-        console.log(base64);
-        return base64
-    };
+            console.log(base64);
+            resolve({
+                data: base64,
+                name: img_name
+            });
+        };
+    });
 }
+
 
 // 将图片文件上传到 GitHub 仓库中
 async function uploadFileToGithub() {
     // 将图片解码至base64
-    const imgbase64 = translate();
-    const Github_url = "https://api.github.com/repos/Mr-KID-github/Stable-Diffusion-Open-Community/contents/images/"
+    const imgbase64 = await translate();
+    console.log(imgbase64.data)
+    const Github_url = "https://api.github.com/repos/Mr-KID-github/Stable-Diffusion-Open-Community/contents/images/" + imgbase64.name
     return window.fetch(Github_url, {
         method: 'PUT',
         headers: {
+            "Accept": "application/vnd.github+json ",
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem('picee_token')
+            "X-GitHub-Api-Version": "2022-11-28",
+            "Authorization": "Bearer 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"
         },
-        body: JSON.stringify(options.body) || null,
-        mode: 'cors'
+        body: JSON.stringify({
+            "message": "Stable Diffusion 上传图片 " + imgbase64.name,
+            "content": imgbase64.data
+        })
     })
         .then(async res => {
             if (res.status >= 200 && res.status < 400) {
+
                 return {
                     status: res.status,
                     data: await res.json()
                 }
             } else {
+                // 显示弹窗
+                alert("图片上传GitHub图床失败！");
+                console.log(res)
                 return {
                     status: res.status,
                     data: null
@@ -102,7 +109,7 @@ async function send2Notion(info) {
     console.log("data", info);
 
     // 将info中的图片上传至Github
-    uploadFileToGithub()
+    await uploadFileToGithub()
     let notion_api_key = "secret_dlGnFXeqAQhodIbcXrhnoJ3T8Px9dGSDUEk6KxOklip"
     let databaseID = "64b0306df17c4a458b077e0e18bc8e16"
 
@@ -155,18 +162,18 @@ async function send2Notion(info) {
                     ]
                 }
             },
-            // "children": [
-            //     {
-            //         "object": "block",
-            //         "type": "image",
-            //         "image": {
-            //             "type": "external",
-            //             "external": {
-            //                 "url": "https://website.domain/images/image.png"
-            //             }
-            //         }
-            //     },
-            // ]
+            "children": [
+                {
+                    "object": "block",
+                    "type": "image",
+                    "image": {
+                        "type": "external",
+                        "external": {
+                            "url": img2Notion_url
+                        }
+                    }
+                },
+            ]
         })
     }).then(response => response.json());
 
