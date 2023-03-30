@@ -46,7 +46,7 @@ function getInfoFromPage() {
 // 监听加载完毕的事件
 window.addEventListener("load", function () {
     console.log("页面加载完毕，延时1s后开始插入button")
-    // 延迟 1 秒钟执行插入操作
+    // 延迟 1 秒钟执行按钮插入操作（等待页面加载完毕）
     setTimeout(function () {
         // 创建一个按钮元素
         const button = document.createElement("button");
@@ -61,22 +61,21 @@ window.addEventListener("load", function () {
         if (container) {
             container.appendChild(button);
             console.log("已经将button插入指定位置");
-
-            // 添加按钮点击事件的监听器
-            button.addEventListener("click", function () {
-                // 从页面中获取需要发送的信息
-                const info = getInfoFromPage();
-                console.log(info)
-                // 向后台脚本发送一个消息，指示它打开popup.html并将信息传递给它
-                chrome.runtime.sendMessage({ action: "open_popup", info: info }, function (response) {
-                    console.log(response);
-                });
-            });
         } else {
             console.log("未找到容器元素，将按钮添加到页面底部");
             // 将按钮添加到页面底部
             document.body.appendChild(button);
         }
+        // 添加按钮点击事件的监听器
+        button.addEventListener("click", function () {
+            // 从页面中获取需要发送的信息
+            const info = getInfoFromPage();
+            console.log(info)
+            // 向后台脚本发送一个消息，指示它打开popup.html并将信息传递给它
+            chrome.runtime.sendMessage({ action: "open_popup", info: info }, function (response) {
+                console.log(response);
+            });
+        });
     }, 1000);
 });
 

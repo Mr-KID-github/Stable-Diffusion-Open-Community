@@ -28,6 +28,7 @@
     "activeTab",
     "tabs",
     "storage",
-    "https://api.notion.com/*"
+    "https://api.notion.com/*",
+    "https://api.github.com/*"
   ]
 }
