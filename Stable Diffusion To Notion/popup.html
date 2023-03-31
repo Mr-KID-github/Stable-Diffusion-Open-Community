@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!-- 基础样式 -->
+<!-- <!DOCTYPE html>
 <html>
 
 <head>
@@ -29,4 +30,357 @@
     <div id="info_parameter">Parameter</div>
 </body>
 
+</html> -->
+
+
+<!-- ChatGPT模仿UI设计大师 - 样式一 现在样式 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Stable Diffusion To Notion</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f8f8;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        button {
+            display: block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            background-color: #000000;
+            color: #ffffff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            width: 100px;
+        }
+
+        button:hover {
+            background-color: #333333;
+        }
+
+        .info-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+
+        .info-item h3 {
+            margin-top: 0;
+        }
+    </style>
+    <script src="popup.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>请确认以下信息发送到 Notion？</h1>
+        <div class="info-item">
+            <h3>从页面中获取的图片：</h3>
+            <img id="info_img" />
+        </div>
+        <div class="info-item">
+            <h3>Prompt：</h3>
+            <div id="info_prompt">Prompt</div>
+        </div>
+        <div class="info-item">
+            <h3>Negative Prompt：</h3>
+            <div id="info_negativePrompt">Negative Prompt</div>
+        </div>
+        <div class="info-item">
+            <h3>Parameter：</h3>
+            <div id="info_parameter">Parameter</div>
+        </div>
+        <button id="sendToNotion">确定</button>
+    </div>
+</body>
+
 </html>
+
+<!-- ChatGPT模仿UI设计大师 - 样式二 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stable Diffusion To Notion</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            margin: auto;
+            padding: 40px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: #3f3f3f;
+        }
+
+        h3 {
+            font-weight: 500;
+            font-size: 18px;
+            color: #3f3f3f;
+            margin-top: 40px;
+        }
+
+        .info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-label {
+            font-weight: 500;
+            font-size: 16px;
+            color: #3f3f3f;
+        }
+
+        .info-value {
+            font-weight: 400;
+            font-size: 14px;
+            color: #555555;
+            margin-top: 5px;
+        }
+
+        .send-button {
+            display: block;
+            margin: auto;
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: #3f3f3f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        .send-button:hover {
+            background-color: #4f4f4f;
+        }
+    </style>
+    <script src="popup.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>请确认以下信息发送到Notion？</h1>
+        <hr>
+        <img id="info_img" class="mx-auto rounded-lg mb-4" />
+        <div class="info">
+            <div class="info-label">Prompt</div>
+            <div class="info-value" id="info_prompt"></div>
+        </div>
+        <div class="info">
+            <div class="info-label">Negative Prompt</div>
+            <div class="info-value" id="info_negativePrompt"></div>
+        </div>
+        <div class="info">
+            <div class="info-label">Parameter</div>
+            <div class="info-value" id="info_parameter"></div>
+        </div>
+        <button class="send-button" id="sendToNotion">确定</button>
+    </div>
+</body>
+
+</html> -->
+
+<!-- ChatGPT加入苹果UI设计 - 样式三
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Stable Diffusion To Notion</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gumby/css/gumby.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gumby/css/gumby-theme.css">
+    <style>
+        #main {
+            width: 320px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #info {
+            height: 200px;
+            border: none;
+        }
+
+        #sendToNotion {
+            background-color: #007aff;
+            border: none;
+            color: white;
+            font-size: 18px;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #000;
+            margin: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #007aff;
+            margin: 20px 0 10px;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .label {
+            font-size: 18px;
+            font-weight: bold;
+            color: #007aff;
+            margin-bottom: 10px;
+        }
+
+        .input {
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            padding: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        .input:focus {
+            outline: none;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <script src="popup.js"></script>
+</head>
+
+<body>
+    <div class="row">
+        <div class="twelve columns centered" id="main">
+            <h1>请确认以下信息发送到Notion？</h1>
+            <hr>
+            <img id="info_img" />
+            <div class="label">Prompt</div>
+            <div type="text" id="info_prompt" class="input"></div>
+            <div class="label">Negative Prompt</div>
+            <div type="text" id="info_negativePrompt" class="input"></div>
+            <div class="label">Parameter</div>
+            <div type="text" id="info_parameter" class="input"></div>
+            <hr>
+            <button id="sendToNotion">确定</button>
+        </div>
+    </div>
+</body>
+
+</html> -->
+
+<!-- ChatGPT模仿苹果UI设计 - 样式四 -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Stable Diffusion To Notion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-eE/AG8XG9iDFo/0nN5wuNzj1xNRN/fMwHD0JukLGbEiZsAsCpSS/j4DgT/fy1TftTIZVTXXBbS+DBDNhZf2MQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="popup.js"></script>
+</head>
+
+<body class="font-sans text-gray-900 leading-normal tracking-wider bg-cover bg-center"
+    style="background-image:url(https://images.unsplash.com/photo-1593642539789-37b7932d2a11)">
+    <div class="flex flex-col h-screen justify-center items-center">
+        <div class="w-full max-w-md">
+            <div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 flex flex-col my-2">
+                <h1 class="text-center text-2xl font-bold mb-6">Stable Diffusion To Notion</h1>
+                <img id="info_img" class="mx-auto rounded-lg mb-4" />
+                <div class="text-lg text-center font-bold text-gray-700 mb-2" id="info_prompt">Prompt</div>
+                <div class="text-lg text-center font-bold text-gray-700 mb-2" id="info_negativePrompt">Negative Prompt
+                </div>
+                <div class="text-lg text-center font-bold text-gray-700 mb-2" id="info_parameter">Parameter</div>
+                <div class="flex justify-center mt-6">
+                    <button
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none"
+                        id="sendToNotion">
+                        <i class="fas fa-paper-plane mr-2"></i>确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html> -->

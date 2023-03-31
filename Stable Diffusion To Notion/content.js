@@ -13,26 +13,19 @@ function getInfoFromPage() {
     const match = all_msg_str.match(regex);
     console.log(match);
 
+    // 匹配 prompt 和 negativePromptRegex
+    const promptRegex = /^(.*?)(?:\nNegative prompt: (.*))?$/is; // ?: 表示这个括号内的表达式是非捕获组
+    const promptMatch = all_msg_str.match(promptRegex);
+    const prompt = promptMatch[1].trim(); // 提取第一组匹配项并去除首尾空格
+    const negativePromptRegex = /Negative prompt:\s*((?:(?!Steps:).)*)/s;
+    const negativePromptMatch = all_msg_str.match(negativePromptRegex);
+    const negativePrompt = negativePromptMatch ? negativePromptMatch[1].trim() : '';
 
-    let prompt = '';
-    let negativePrompt = '';
-    let parameter = '';
-    if (match) {
-        if (match[1].includes("Negative prompt: ")) {
-            prompt = '';
-            negativePrompt = match[1] || '';
-            parameter = match[3] || '';
-        } else {
-            prompt = match[1] || '';
-            negativePrompt = match[2] || '';
-            parameter = match[3] || '';
-        }
-        console.log(prompt);
-        console.log(negativePrompt);
-        console.log(parameter);
-    } else {
-        console.log('No match found.');
-    }
+    // 匹配 parameter
+    const parameterRegex = /Steps:.*$/m;
+    const parameterMatch = all_msg_str.match(parameterRegex);
+    const parameter = parameterMatch[0].trim(); // 提取匹配项并去除首尾空格
+
 
     return {
         "img": img.src,

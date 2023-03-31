@@ -78,7 +78,7 @@ async function uploadFileToGithub() {
             "Accept": "application/vnd.github+json ",
             "Content-Type": "application/json",
             "X-GitHub-Api-Version": "2022-11-28",
-            "Authorization": "Bearer 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"
+            "Authorization": "Bearer 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"
         },
         body: JSON.stringify({
             "message": "Stable Diffusion 上传图片 " + imgbase64.name,
@@ -87,7 +87,6 @@ async function uploadFileToGithub() {
     })
         .then(async res => {
             if (res.status >= 200 && res.status < 400) {
-
                 return {
                     status: res.status,
                     data: await res.json()
